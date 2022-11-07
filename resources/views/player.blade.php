@@ -29,10 +29,50 @@
     <div class="mt-8">
         <form class="flex justify-center" method="POST" action="{{ route('getplayer') }}">
             @csrf
-            <h1 class="text-center text-2xl mt-8">Get data from a Faceit player :</h1>
-            <input class="p-2 rounded-lg ml-4 text-black" placeholder="Player id" type="text" name="playerid">
-            <button class="bg-white text-black p-2 rounded-lg ml-8">Get data</button>
+            <div class="inline-block">
+            <h1 class="text-center text-2xl mt-8">Get stats from a Faceit player :</h1>
+            <input class="p-2 rounded-lg ml-4 text-black mt-4" placeholder="Faceit username" type="text" name="playerid">
+            <button class="bg-white text-black p-2 rounded-lg ml-8">Get stats</button>
+            </div>
         </form>
+    </div>
+    <div>
+        <h1 class="text-2xl text-center mt-6">Example of professionnal players :</h1>
+    </div>
+    <div class="mt-4 flex justify-center">
+        <div class="flex justify-center">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value="ZywOo">{{$zywoo}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
+        <div class="flex justify-center ml-8">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar2 }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value="Twistzz">{{$twistzz}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
+        <div class="flex justify-center ml-8">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar3 }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value="nafanyMEOW">{{$nafany}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
     </div>
 </body>
 

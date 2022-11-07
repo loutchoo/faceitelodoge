@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>FaceitElo - Player</title>
 </head>
 <style>
@@ -56,6 +56,18 @@
         @elseif($elo > 1)
             <img class="" width="80" height="80" src="{{ asset('images/lvl1.png') }}" alt="">
         @endif
+    </div>
+    <div>
+        <div class="flex justify-center">
+            <h1 class="text-center text-2xl">Winrate : {{$winrate}}%</h1>
+            <h1 class="text-center text-2xl ml-4">Matches : {{$matches}}</h1>
+            <h1 class="text-center text-2xl ml-4">Average K/D : {{$averagekd}}</h1>
+        </div>
+        <div class="flex justify-center">
+            <h1 class="text-center text-2xl ml-4">Wins : {{$wins}}</h1>
+            <h1 class="text-center text-2xl ml-4">Lost : {{$lost}}</h1>
+            <h1 class="text-center text-2xl ml-4">Average HS : {{$averagehs}}</h1>
+        </div>
     </div>
 </body>
 

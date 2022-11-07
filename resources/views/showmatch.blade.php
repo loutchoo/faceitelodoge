@@ -32,8 +32,11 @@
         <h1 class="text-lg text-center mt-6">Match id : {{ $matchid }}</h1>
         <h1 class="text-center"><a class="" href="{{ $matchurl }}">Page of the match</a></h1>
     </div>
+    <div>
+        <h1 class="text-center text-2xl mt-4">{{$scoreexact}}</h1>
+    </div>
     <div class="flex justify-center text-2xl">
-        <div class="mt-8">
+        <div class="mt-4">
             <div>
                 <h1>{{ $team1 }} :</h1>
                 <h1>{{ $score1 }}</h1>
@@ -64,7 +67,7 @@
                 <h1 class="ml-4">{{ $nickname5 }}</h1>
             </div>
         </div>
-        <div class="mt-8 ml-20">
+        <div class="mt-4 ml-20">
             <h1>{{ $team2 }} :</h1>
             <h1>{{ $score2 }}</h1>
             <div class="flex mt-4">
@@ -92,9 +95,6 @@
                         height="100" src="{{ asset('images/faceit.png') }}" alt="faceit"></a>
                 <h1 class="ml-4">{{ $nickname10 }}</h1>
             </div>
-        </div>
-        <div class="border border-black">
-            <h1>Scoreboard</h1>
         </div>
     </div>
 </body>

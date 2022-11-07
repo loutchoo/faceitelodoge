@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MatchController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,8 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'home']);
 
-Route::get('/matchfinder', [MainController::class, 'matchfinder']);
-Route::post('/matchfinder', [MainController::class, 'getmatch'])->name('getmatch');
+Route::get('/matchfinder', [MatchController::class, 'matchfinder']);
+Route::post('/matchfinder', [MatchController::class, 'getmatch'])->name('getmatch');
 
-Route::get('/playerfinder', [MainController::class, 'playerfinder']);
-Route::post('/playerfinder', [MainController::class, 'getplayer'])->name('getplayer');
+Route::get('/playerfinder', [PlayerController::class, 'playerfinder'])->name('getplayer');
+Route::post('/playerfinder', [PlayerController::class, 'getplayer'])->name('getplayer');

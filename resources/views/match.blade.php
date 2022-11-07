@@ -30,8 +30,8 @@
         <form class="flex justify-center" method="POST" action="{{ route('getmatch') }}">
             @csrf
             <h1 class="text-center text-2xl mt-8">Get data from a Faceit match :</h1>
-            <input class="p-2 rounded-lg ml-4 text-black" placeholder="Match id" type="text" name="matchid">
-            <button class="bg-white text-black p-2 rounded-lg ml-8">Get data</button>
+            <input class="p-2 rounded-lg ml-4 text-black mt-6" placeholder="Match id" type="text" name="matchid">
+            <button class="bg-white text-black p-2 rounded-lg ml-8 mt-6">Get data</button>
         </form>
     </div>
 </body>
