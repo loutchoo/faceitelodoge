@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LastUser;
 use Exception;
 use Illuminate\Http\Request;
 use FaceitClient\FaceitClient;
@@ -10,46 +11,58 @@ use Illuminate\Support\Facades\Http;
 class PlayerController extends Controller
 {
     public function getplayer(Request $request, Exception $exception){
-        try {
-            $json = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$request->playerid");
-        $data = json_decode($json);
-        $player_id = $data->player_id;
-
-        $stats = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players/$player_id/stats/csgo");
-        $statsjson = json_decode($stats);
-
-        $nickname = $data->nickname;
-        $avatar = $data->avatar;
-        $elo = $data->games->csgo->faceit_elo;
-        $lvl = $data->games->csgo->skill_level;
-        $winrate = $statsjson->lifetime->{'Win Rate %'};
-        $matches = $statsjson->lifetime->Matches;
-        $wins = $statsjson->lifetime->Wins;
-        $lost = $matches - $wins;
-        $averagekd = $statsjson->lifetime->{'Average K/D Ratio'};
-        $averagehs = $statsjson->lifetime->{'Average Headshots %'};
-
-
-
         
-        return view('showplayer')->with([
-            'nickname' => $nickname,
-            'avatar' => $avatar,
-            'elo' => $elo,
-            'lvl' => $lvl,
-            'winrate' => $winrate,
-            'matches' => $matches,
-            'averagekd' => $averagekd,
-            'wins' => $wins,
-            'lost' => $lost,
-            'averagehs' => $averagehs,
+        $request = $request->validate([
+            'playerid' => 'required'
         ]);
+
+        $username = $request['playerid'];
+
+        LastUser::create([
+            'username' => $request['playerid']
+        ]);
+        try {
+            $json = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$username");
+            $data = json_decode($json);
+            $player_id = $data->player_id;
+            $stats = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players/$player_id/stats/csgo");
+            $statsjson = json_decode($stats);
+            $nickname = $data->nickname;
+            $avatar = $data->avatar;
+            $elo = $data->games->csgo->faceit_elo;
+            $lvl = $data->games->csgo->skill_level;
+            $winrate = $statsjson->lifetime->{'Win Rate %'};
+            $matches = $statsjson->lifetime->Matches;
+            $wins = $statsjson->lifetime->Wins;
+            $lost = $matches - $wins;
+            $averagekd = $statsjson->lifetime->{'Average K/D Ratio'};
+            $averagehs = $statsjson->lifetime->{'Average Headshots %'};
+            
+            return view('showplayer')->with([
+                'nickname' => $nickname,
+                'avatar' => $avatar,
+                'elo' => $elo,
+                'lvl' => $lvl,
+                'winrate' => $winrate,
+                'matches' => $matches,
+                'averagekd' => $averagekd,
+                'wins' => $wins,
+                'lost' => $lost,
+                'averagehs' => $averagehs,
+            ]);
         } catch (Exception $e) {
             return redirect()->route('getplayer');
         }
     }
 
     public function playerfinder(){
+        $lastusers = LastUser::orderBy('created_at', 'desc')->take(10)->get();
+        dd($lastusers['0']->attributes['username']);
+
+
+        $users = $lastusers->items[0];
+        dd($users);
+
         $zywoo = "ZywOo";
         $json = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$zywoo");
         $data = json_decode($json);
@@ -71,6 +84,9 @@ class PlayerController extends Controller
             'avatar2' => $avatar2,
             'nafany' => $nafany,
             'avatar3' => $avatar3,
+            'lastusers' => $lastusers,
         ]);
+
+
     }
 }

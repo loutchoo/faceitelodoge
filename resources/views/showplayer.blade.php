@@ -23,10 +23,23 @@
 </style>
 
 <body class="bg google text-white">
-    <div>
-        <h1 class="text-white text-5xl text-center mt-4"><a href="/">FaceitElo</a></h1>
-    </div>
     <div class="flex justify-center mt-4">
+        <img src="https://www.pngmart.com/files/11/Shiba-Inu-Doge-Meme-PNG-Image.png" height="50" width="75" alt="">
+        <h1 class="text-white text-5xl text-center mt-6 mx-2"><a href="/">FaceitElo</a></h1>
+        <img src="https://www.pngmart.com/files/11/Shiba-Inu-Doge-Meme-PNG-Image.png" height="50" width="75" alt="">
+    </div>
+
+    <div class="">
+        <form class="flex justify-center" method="POST" action="{{ route('getplayer') }}">
+            @csrf
+            <div class="inline-block">
+            <h1 class="text-center text-2xl mt-8">Get stats from a Faceit player :</h1>
+            <input class="p-2 rounded-lg ml-4 text-black mt-4" placeholder="Faceit username" type="text" name="playerid">
+            <button class="bg-white text-black p-2 rounded-lg ml-8">Get stats</button>
+            </div>
+        </form>
+    </div>
+    <div class="flex justify-center mt-8">
         <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar }}" alt="">
         <h1 class="text-2xl mt-8 ml-4">{{ $nickname }}</h1><a
             href="https://www.faceit.com/en/players/{{ $nickname }}"><img class="rounded-lg mt-8 ml-2" width="30"
@@ -66,7 +79,7 @@
         <div class="flex justify-center">
             <h1 class="text-center text-2xl ml-4">Wins : {{$wins}}</h1>
             <h1 class="text-center text-2xl ml-4">Lost : {{$lost}}</h1>
-            <h1 class="text-center text-2xl ml-4">Average HS : {{$averagehs}}</h1>
+            <h1 class="text-center text-2xl ml-4">Average HS : {{$averagehs}}%</h1>
         </div>
     </div>
 </body>

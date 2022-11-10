@@ -73,6 +73,17 @@
             </form>
             </div>
         </div>
+        <div class="flex justify-center ml-8">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar3 }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value="{{$}}">{{$}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
     </div>
 </body>
 
