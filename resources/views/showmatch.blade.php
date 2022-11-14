@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
     <title>FaceitElo - Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <style>
     .google {
@@ -23,10 +25,10 @@
 </style>
 
 <body class="google bg text-white">
-    <div>
-        <a href="/">
-            <h1 class="text-white text-5xl text-center mt-4"><a href="/">FaceitElo</a></h1>
-        </a>
+    <div class="flex justify-center mt-4">
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
+        <h1 class="text-white text-5xl text-center mt-6 mx-2"><a href="/">FaceitElo</a></h1>
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
     </div>
     <div>
         <h1 class="text-lg text-center mt-6">Match id : {{ $matchid }}</h1>

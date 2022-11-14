@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use FaceitClient\FaceitClient;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
 class PlayerController extends Controller
 {
@@ -18,9 +19,15 @@ class PlayerController extends Controller
 
         $username = $request['playerid'];
 
-        LastUser::create([
-            'username' => $request['playerid']
-        ]);
+        $lastusers = LastUser::orderBy('created_at','desc')->take(3)->get();
+        if(in_array($username, array($lastusers[0]['username'], $lastusers[1]['username']))){
+            //
+        } else{
+            LastUser::create([
+                'username' => $request['playerid']
+            ]);
+        }
+
         try {
             $json = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$username");
             $data = json_decode($json);
@@ -51,41 +58,50 @@ class PlayerController extends Controller
                 'averagehs' => $averagehs,
             ]);
         } catch (Exception $e) {
-            return redirect()->route('getplayer');
+            LastUser::orderBy('created_at','desc')->take(1)->delete();
+            return Redirect::back()->withErrors(['error' => "This faceit account doesn't exist"]);
         }
     }
 
     public function playerfinder(){
-        $lastusers = LastUser::orderBy('created_at', 'desc')->take(10)->get();
-        dd($lastusers['0']->attributes['username']);
-
-
-        $users = $lastusers->items[0];
-        dd($users);
+        $lastusers = LastUser::orderBy('created_at','desc')->take(3)->get();
+        $lastuser = $lastusers[0]['username'];
+        $lastuser2 = $lastusers[1]['username'];
+        $lastuser3 = $lastusers[2]['username'];
 
         $zywoo = "ZywOo";
-        $json = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$zywoo");
-        $data = json_decode($json);
-        $avatar = $data->avatar;
 
         $twistzz = "Twistzz";
-        $json2 = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$twistzz");
-        $data2 = json_decode($json2);
-        $avatar2 = $data2->avatar;
 
         $nafany = "nafanyMEOW";
-        $json3 = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$nafany");
-        $data3 = json_decode($json3);
-        $avatar3 = $data3->avatar;
+
+        try {
+        $json4 = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$lastuser");
+        $data4 = json_decode($json4);
+        $avatar4 = $data4->avatar;
+            
+        $json5 = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$lastuser2");
+        $data5 = json_decode($json5);
+        $avatar5 = $data5->avatar;
+            
+        $json6 = Http::withToken('ab5be9e6-efa4-45d0-9c98-004e9c91934c')->get("https://open.faceit.com/data/v4/players?nickname=$lastuser3");
+        $data6 = json_decode($json6);
+        $avatar6 = $data6->avatar;
+    } catch (Exception $e) {
+        return redirect()->route('getplayer');
+    }
+            
         return view('player')->with([
             'zywoo' => $zywoo,
-            'avatar' => $avatar,
             'twistzz' => $twistzz,
-            'avatar2' => $avatar2,
             'nafany' => $nafany,
-            'avatar3' => $avatar3,
-            'lastusers' => $lastusers,
-        ]);
+            'lastuser' => $lastuser,
+            'lastuser2' => $lastuser2,
+            'lastuser3' => $lastuser3,
+            'avatar4' => $avatar4,
+            'avatar5' => $avatar5,
+            'avatar6' => $avatar6,
+            ]);
 
 
     }

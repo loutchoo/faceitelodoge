@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
     <title>FaceitElo - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <style>
     .google {
@@ -23,8 +25,10 @@
 </style>
 
 <body class="google bg text-white">
-    <div>
-        <h1 class="text-white text-5xl text-center mt-4"><a href="/">FaceitElo</a></h1>
+    <div class="flex justify-center mt-4 animate__animated animate__bounce">
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
+        <h1 class="text-white text-5xl text-center mt-6 mx-2"><a href="/">FaceitElo</a></h1>
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
     </div>
     <div class="mt-8 text-4xl text-center mx-8">
         <a href="/playerfinder">Playerfinder</a>

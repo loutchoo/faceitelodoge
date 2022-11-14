@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>FaceitElo - Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <style>
     .google {
@@ -24,9 +25,9 @@
 
 <body class="bg google text-white">
     <div class="flex justify-center mt-4">
-        <img src="https://www.pngmart.com/files/11/Shiba-Inu-Doge-Meme-PNG-Image.png" height="50" width="75" alt="">
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
         <h1 class="text-white text-5xl text-center mt-6 mx-2"><a href="/">FaceitElo</a></h1>
-        <img src="https://www.pngmart.com/files/11/Shiba-Inu-Doge-Meme-PNG-Image.png" height="50" width="75" alt="">
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
     </div>
 
     <div class="">

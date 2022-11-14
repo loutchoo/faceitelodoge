@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>FaceitElo - PlayerFinder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <style>
     .google {
@@ -23,10 +25,12 @@
 </style>
 
 <body class="google bg text-white">
-    <div>
-        <h1 class="text-white text-5xl text-center mt-4"><a href="/">FaceitElo</a></h1>
+    <div class="flex justify-center mt-4">
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
+        <h1 class="text-white text-5xl text-center mt-6 mx-2"><a href="/">FaceitElo</a></h1>
+        <img src="{{ asset('images/doge.png') }}" height="50" width="75" alt="">
     </div>
-    <div class="mt-8">
+    <div class="mt-2 animate__animated animate__swing">
         <form class="flex justify-center" method="POST" action="{{ route('getplayer') }}">
             @csrf
             <div class="inline-block">
@@ -37,14 +41,19 @@
         </form>
     </div>
     <div>
-        <h1 class="text-2xl text-center mt-6">Example of professionnal players :</h1>
+        @if($errors->any())
+        <h1 class="text-xl text-red-600 text-center mt-2">{{$errors->first()}}</h1>
+        @endif
+    </div>
+    <div>
+        <h1 class="text-2xl text-center mt-10">Example of professionnal players :</h1>
     </div>
     <div class="mt-4 flex justify-center">
         <div class="flex justify-center">
             <div class="inline-block">
             <form method="POST" action="{{route('getplayer')}}">
             @csrf
-            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar }}" alt="">
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="https://assets.faceit-cdn.net/avatars/3b536dda-e3dd-40cd-baed-7e66ab050c8f_1550499998143.png" alt="">
             <div class="flex justify-center">
             <button class="mt-1" name="playerid" value="ZywOo">{{$zywoo}}</button>
             </div>
@@ -55,7 +64,7 @@
             <div class="inline-block">
             <form method="POST" action="{{route('getplayer')}}">
             @csrf
-            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar2 }}" alt="">
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="https://assets.faceit-cdn.net/avatars/a51c1404-1c5e-4688-b82c-ade59245e5b1_1612035108594.jpg" alt="">
             <div class="flex justify-center">
             <button class="mt-1" name="playerid" value="Twistzz">{{$twistzz}}</button>
             </div>
@@ -66,9 +75,23 @@
             <div class="inline-block">
             <form method="POST" action="{{route('getplayer')}}">
             @csrf
-            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar3 }}" alt="">
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="https://assets.faceit-cdn.net/avatars/7d441097-f75b-43b0-b0f6-3d1242a0e173_1550538527177.jpg" alt="">
             <div class="flex justify-center">
             <button class="mt-1" name="playerid" value="nafanyMEOW">{{$nafany}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-2xl text-center mt-6">Last players searched :</h1>
+    <div class="mt-4 flex justify-center">
+        <div class="flex justify-center">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar4 }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value="{{$lastuser}}">{{$lastuser}}</button>
             </div>
             </form>
             </div>
@@ -77,9 +100,20 @@
             <div class="inline-block">
             <form method="POST" action="{{route('getplayer')}}">
             @csrf
-            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar3 }}" alt="">
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar5 }}" alt="">
             <div class="flex justify-center">
-            <button class="mt-1" name="playerid" value="{{$}}">{{$}}</button>
+            <button class="mt-1" name="playerid" value={{$lastuser2}}>{{$lastuser2}}</button>
+            </div>
+            </form>
+            </div>
+        </div>
+        <div class="flex justify-center ml-8">
+            <div class="inline-block">
+            <form method="POST" action="{{route('getplayer')}}">
+            @csrf
+            <img class="border-2 border-black rounded-lg" width="100" height="100" src="{{ $avatar6 }}" alt="">
+            <div class="flex justify-center">
+            <button class="mt-1" name="playerid" value={{$lastuser3}}>{{$lastuser3}}</button>
             </div>
             </form>
             </div>
